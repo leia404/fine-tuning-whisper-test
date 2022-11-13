@@ -275,7 +275,8 @@ training_args = Seq2SeqTrainingArguments(
     adam_beta1=0.9,
     adam_beta2=0.98,
     adam_epsilon=1e-6,
-    max_grad_norm=1
+    max_grad_norm=1,
+    save_total_limit=2
 )
 
 trainer = Seq2SeqTrainer(
