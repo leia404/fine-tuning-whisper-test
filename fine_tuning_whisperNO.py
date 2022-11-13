@@ -1,27 +1,28 @@
+import argparse
 import collections
+import json
+import math
+import os
+import random
+import re
+from dataclasses import dataclass, field
+from typing import Any, Dict, List, Optional, Union
+
+import librosa
+import numpy as np
+import pandas as pd
+import torch
 # if not hasattr(collections, "Container"):
 #     import collections.abc
 #     collections.Container = collections.abc.Container
 import transformers
-from transformers import WhisperFeatureExtractor, WhisperTokenizer, WhisperProcessor
-from transformers import Seq2SeqTrainingArguments, Seq2SeqTrainer
-from datasets import load_dataset, load_metric, ClassLabel, Audio, Dataset
-import random
-import pandas as pd
-import math
-import numpy as np
-import librosa
-import os
-import torch
-from pydub import AudioSegment
-from IPython.display import display, HTML
-import re
-import json
-from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional, Union
 import wandb
-import argparse
-
+from datasets import Audio, ClassLabel, Dataset, load_dataset, load_metric
+from IPython.display import HTML, display
+from pydub import AudioSegment
+from transformers import (Seq2SeqTrainer, Seq2SeqTrainingArguments,
+                          WhisperFeatureExtractor, WhisperProcessor,
+                          WhisperTokenizer)
 
 wandb.init(project="fine-tuning-whisperNO", entity="janinerugayan")
 
