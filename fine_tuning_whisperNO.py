@@ -39,9 +39,9 @@ def remove_special_characters(batch):
 
 def prepare_dataset(batch):
     audio = batch["audio"]
-    # compute log-Mel input features from input audio array 
+    # compute log-Mel input features from input audio array
     batch["input_features"] = feature_extractor(audio["array"], sampling_rate=audio["sampling_rate"]).input_features[0]
-    # encode target text to label ids 
+    # encode target text to label ids
     batch["labels"] = tokenizer(batch["text"]).input_ids
     return batch
 
@@ -157,9 +157,9 @@ print("Loading dataset direct from data dir to pandas dataframe")
 #                  "../../datasets/NordTrans_TUL/train/NRK/",
 #                  "../../datasets/NordTrans_TUL/train/Rundkast_cuts_random25per_30secmax/"]
 
-data_dir_list = ["../../datasets/NordTrans_TUL/train_small/Stortinget/", 
-                    "../../datasets/NordTrans_TUL/train_small/NRK/", 
-                    "../../datasets/NordTrans_TUL/train_small/Rundkast/"]
+data_dir_list = ["../../datasets/NordTrans_TUL/train_small/Stortinget/",
+                 "../../datasets/NordTrans_TUL/train_small/NRK/",
+                 "../../datasets/NordTrans_TUL/train_small/Rundkast/"]
 
 csv_export_dir = "../../model_ckpts/" + args.fine_tuned_model_ver + "/runs/"
 
@@ -242,7 +242,7 @@ elif args.use_asd_metric == 0:
         # we do not want to group tokens when computing the metrics
         pred_str = tokenizer.batch_decode(pred_ids, skip_special_tokens=True)
         label_str = tokenizer.batch_decode(label_ids, skip_special_tokens=True)
-        wer = wer_metric.compute(predictions=pred_str, references=label_str) 
+        wer = wer_metric.compute(predictions=pred_str, references=label_str)
         return {"wer": wer}
 
 
@@ -250,7 +250,7 @@ repo_local_dir = "../../model_ckpts/" + args.fine_tuned_model_ver + "/"
 
 # training arguments for whisper
 training_args = Seq2SeqTrainingArguments(
-    output_dir=repo_local_dir,  
+    output_dir=repo_local_dir,
     per_device_train_batch_size=16,
     gradient_accumulation_steps=1,  # increase by 2x for every 2x decrease in batch size
     learning_rate=args.learning_rate,
