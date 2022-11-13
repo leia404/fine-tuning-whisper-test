@@ -1,7 +1,7 @@
 import collections
-if not hasattr(collections, "Container"):
-    import collections.abc
-    collections.Container = collections.abc.Container
+# if not hasattr(collections, "Container"):
+#     import collections.abc
+#     collections.Container = collections.abc.Container
 import transformers
 from transformers import WhisperFeatureExtractor, WhisperTokenizer, WhisperProcessor
 from transformers import Seq2SeqTrainingArguments, Seq2SeqTrainer
