@@ -251,8 +251,8 @@ repo_local_dir = "../../model_ckpts/" + args.fine_tuned_model_ver + "/"
 # training arguments for whisper
 training_args = Seq2SeqTrainingArguments(
     output_dir=repo_local_dir,
-    per_device_train_batch_size=16,
-    gradient_accumulation_steps=1,  # increase by 2x for every 2x decrease in batch size
+    per_device_train_batch_size=8,
+    gradient_accumulation_steps=2,  # increase by 2x for every 2x decrease in batch size
     learning_rate=args.learning_rate,
     warmup_steps=500,
     num_train_epochs=args.num_train_epochs,
