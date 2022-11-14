@@ -116,7 +116,7 @@ parser.add_argument("--fine_tuned_model_ver",   type=str)
 parser.add_argument("--export_model_dir",       type=str)
 parser.add_argument("--num_train_epochs",       type=int)
 parser.add_argument("--learning_rate",          type=float)
-parser.add_argument("--used_asd_metric",        type=int)
+parser.add_argument("--use_asd_metric",        type=int)
 args = parser.parse_args()
 
 
