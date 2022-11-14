@@ -46,7 +46,7 @@ def prepare_dataset(batch):
     return batch
 
 
-def load_dataset_from_files(data_dir_list:list[str], csv_export_dir:str, split_ratio=0.1, csv_export=True):
+def load_dataset_from_files(data_dir_list, csv_export_dir, split_ratio=0.1, csv_export=True):
     frames = []
     for path in data_dir_list:
         source = os.path.basename(os.path.dirname(path))
@@ -56,22 +56,22 @@ def load_dataset_from_files(data_dir_list:list[str], csv_export_dir:str, split_r
             if source == "Rundkast":  # to modify depending on Rundkast cuts folder name
                 for fn in files:
                     if fn.endswith(".wav"):
-                        wav_id = os.path.splitext(fn)[0]
+                        wav_id = source + "_" + os.path.splitext(fn)[0]
                         path = os.path.join(root, fn)
                         wavfile_data.append((wav_id, fn, path, source))
                     elif fn.endswith(".txt"):
-                        text_id = os.path.splitext(fn)[0]
+                        text_id = source + "_" + os.path.splitext(fn)[0]
                         with open(os.path.join(root, fn), encoding="utf-8") as text_file:
                             text = text_file.read()
                         textfile_data.append((text_id, text))
             else:
                 for fn in files:
                     if fn.endswith(".wav"):
-                        wav_id = os.path.splitext(fn)[0]
+                        wav_id = source + "_" + os.path.splitext(fn)[0]
                         path = os.path.join(root, fn)
                         wavfile_data.append((wav_id, fn, path, source))
                     elif fn.endswith(".txt-utf8"):
-                        text_id = os.path.splitext(fn)[0]
+                        text_id = source + "_" + os.path.splitext(fn)[0]
                         with open(os.path.join(root, fn), encoding="utf-8-sig") as text_file:
                             text = text_file.read()
                         textfile_data.append((text_id, text))
