@@ -16,19 +16,19 @@ import torch
 #     import collections.abc
 #     collections.Container = collections.abc.Container
 import transformers
-import wandb
+import wandb    # 跟踪、可视化和管理机器学习实验的工具
 from datasets import Audio, ClassLabel, Dataset, load_dataset, load_metric
 from IPython.display import HTML, display
 from pydub import AudioSegment
 from transformers import (Seq2SeqTrainer, Seq2SeqTrainingArguments,
                           WhisperFeatureExtractor, WhisperProcessor,
-                          WhisperTokenizer)
+                          WhisperTokenizer, WhisperForConditionalGeneration)
 
 wandb.init(project="fine-tuning-whisperNO", entity="janinerugayan")
 
 # https://huggingface.co/transformers/main_classes/logging.html
 # verbosity set to print errors only, by default it is set to 30 = error and warnings
-transformers.logging.set_verbosity(40)
+transformers.logging.set_verbosity(40) # 设置日志输出级别
 
 
 chars_to_ignore_regex = '[\,\?\.\!\-\;\:\"\*]'
@@ -109,7 +109,7 @@ def load_dataset_from_files(data_dir_list, csv_export_dir, split_ratio=0.1, csv_
 # ---------------------------------------------------
 # LOAD PRETRAINED MODEL
 # ---------------------------------------------------
-
+# 设置命令行参数
 parser=argparse.ArgumentParser()
 parser.add_argument("--original_model",         type=str)
 parser.add_argument("--fine_tuned_model_ver",   type=str)
@@ -187,7 +187,7 @@ class DataCollatorSpeechSeq2SeqWithPadding:
         # first treat the audio inputs by simply returning torch tensors
         input_features = [{"input_features": feature["input_features"]} for feature in features]
         batch = self.processor.feature_extractor.pad(input_features, return_tensors="pt")
-
+        # return_tensors="pt" 表示返回pytorch的tensor
         # get the tokenized label sequences
         label_features = [{"input_ids": feature["labels"]} for feature in features]
         # pad the labels to max length
