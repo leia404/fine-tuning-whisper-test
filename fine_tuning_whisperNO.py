@@ -22,7 +22,7 @@ from IPython.display import HTML, display
 from pydub import AudioSegment
 from transformers import (Seq2SeqTrainer, Seq2SeqTrainingArguments,
                           WhisperFeatureExtractor, WhisperProcessor,
-                          WhisperTokenizer)
+                          WhisperTokenizer, WhisperForConditionalGeneration)
 
 wandb.init(project="fine-tuning-whisperNO", entity="janinerugayan")
 
